@@ -30,7 +30,7 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/user', methods=['GET'])
+@app.route('/contacts', methods=['GET'])
 def get_all_contacts():
     contacts = Contact.query.all()
     contacts = list(map(lambda x:x.serialize(), contacts))
