@@ -44,7 +44,9 @@ def get_one_contact(id):
 
 @app.route('/contacts', methods=['POST'])
 def add_contact():
-    contact = request.json
+    body = request.json
+    new_contact = Contact(full_name=body["full_name"], email=body["email"], phone=body["phone"], address=body["address"])
+    db.session.add(new_contact)
     contacts = Contact.query.all()
     contacts = list(map(lambda x:x.serialize(), contacts))
     return jsonify(contacts), 200
