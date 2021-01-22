@@ -36,6 +36,14 @@ def get_all_contacts():
     contacts = list(map(lambda x:x.serialize(), contacts))
     return jsonify(contacts), 200
 
+@app.route('/contacts/<int:id>', methods=['GET'])
+def get_one_contact():
+    contacts = Contact.query.all()
+    contacts = list(map(lambda x:x.serialize(), contacts))
+    return jsonify(contacts), 200
+
+
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
