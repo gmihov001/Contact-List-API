@@ -37,10 +37,10 @@ def get_all_contacts():
     return jsonify(contacts), 200
 
 @app.route('/contacts/<int:id>', methods=['GET'])
-def get_one_contact():
-    contacts = Contact.query.all()
-    contacts = list(map(lambda x:x.serialize(), contacts))
-    return jsonify(contacts), 200
+def get_one_contact(id):
+    contact = Contact.query.get(id)
+    contact = list(map(lambda x:x.serialize(), contact))
+    return jsonify(contact), 200
 
 
 
