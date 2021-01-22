@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-import os
+import os, json
 from flask import Flask, request, jsonify, url_for
 from flask_migrate import Migrate
 from flask_swagger import swagger
@@ -42,6 +42,12 @@ def get_one_contact(id):
     contact = list(map(lambda x:x.serialize(), contact))
     return jsonify(contact), 200
 
+@app.route('/contacts', methods=['POST'])
+def add_contact():
+    contact = request.json
+    contacts = Contact.query.all()
+    contacts = list(map(lambda x:x.serialize(), contacts))
+    return jsonify(contacts), 200
 
 
 # this only runs if `$ python src/main.py` is executed
